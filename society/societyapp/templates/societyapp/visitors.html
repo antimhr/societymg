@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Visitors</title>
+</head>
+
+<style>
+    body{
+        margin:0;
+        padding: 0;
+        height: 100vh;
+        background-image: linear-gradient(to top right, #d6ce15, #3aafa9);
+        background-repeat: no-repeat;
+    }
+    .button{
+        margin: .7rem 0;
+        padding:.8rem 1.5rem;
+        background-color: lightblue;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .button:hover{
+        background-color: rgba(125, 184, 92, 1);
+        box-shadow: 1px 3px 1px 1px #888888;
+    }
+    form{
+        border-radius: 10px;
+        width: 25%;
+        padding: 1.2rem;
+        margin: auto;
+        background-color: rgba(230, 250, 240, .8);
+        box-shadow: 5px 10px 20px 10px #888888;
+    }
+    .basicInfo{
+        margin: .3rem 0;
+        width: 65%;
+        padding: 5px 12px;
+        border: 1px solid grey;
+        border-radius: 8px;
+        outline: none;
+    }
+</style>
+<body>
+
+<main role="main" class="container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+</main>
+<div class="row">
+    <div class="col-md-12" style="margin-top: 2rem;">
+        <form action="{% url 'visitors' %}" method="post">{% csrf_token %}
+            <center><h3> Add Visitors </h3></center>
+
+
+            <fieldset>
+
+
+                <strong><legend>Your Basic Info</legend></strong>
+                <hr>
+                <div style="margin-left: 1.5rem;">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" class="basicInfo"><br><br>
+
+                <div style="">
+                    <label>Gender:</label></strong><br>
+                    <input type="radio"  name="gender" value="male"><label  class="light"> Male </label><br>
+                    <input type="radio"  name="gender" value="female"><label  class="light"> Female </label><br><br>
+                </div>
+
+
+                <label for="mobile">Mobile No:</label><br>
+                <input type="number" id="mobile" name="mobile" class="basicInfo"><br>
+
+                <label for="name">Address:</label><br>
+                <input type="text" name="place" class="basicInfo"><br>
+
+
+            </fieldset>
+
+
+            <center><button type="submit" class="button">Submit</button></center>
+            </div>
+
+        </form>
+    </div>
+</div>
+<center>
+    <br>
+<div class="text-center">Click here to go? <a href="{% url 'guest_dashboard' %}">Home</a></div>
+    </center>
+</div>
+
+</body>
+</html>

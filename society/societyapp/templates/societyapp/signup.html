@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<style>
+
+    body{
+        margin:0;
+        padding: 0;
+        height: 100%;
+        background-image: linear-gradient(to top right, #d6ce15, #3aafa9);
+        background-repeat: no-repeat;
+    }
+
+    input{
+        margin-top: -8px;
+        margin-bottom: 8px;
+        height: 1rem;
+    }
+    form{
+        margin-bottom: 1rem;
+    }
+
+</style>
+
+<body>
+
+{% block content %}
+<center>
+{% if error %}
+{{ error }}
+{% endif %}
+</center>
+<form action="{% url 'signup' %}" method="POST"> {% csrf_token %}
+    <div class="container mt-3" style="width:30%; padding:2rem; background-color: lightblue; border-radius: 1rem;">
+        <div class="mb-1">
+            <label for="name" class="form-label">Name</label>
+            <input type="name" class="form-control" id="name" name="name" required>
+        </div>
+
+        <div class="mb-1">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="mb-1">
+            <label for="tower" class="form-label">Tower No</label>
+            <input type="text" class="form-control" id="tower" name="tower" required>
+        </div>
+        <div class="mb-1">
+            <label for="Flat" class="form-label">Flat No</label>
+            <input type="text" class="form-control" id="flat" name="flat" required>
+        </div>
+        <div class="mb-1">
+            <label for="phone" class="form-label">Phone No</label>
+            <input type="text" class="form-control" id="phone" name="phone" required>
+        </div>
+
+        <div class="mb-1">
+            <label for="password1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password1" name="password1" required>
+        </div>
+        <div class="mb-1">
+            <label for="password2" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="password2" name="password2" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-left: 38%; margin-top: .7rem; margin-bottom: .5rem;">Submit</button>
+        <div>
+            <center>
+                <a href="\societyapp/guest_dashboard" style="font-size: 14px;">Click Here To Enter As A Guest</a>
+            </center>
+        </div>
+    </div>
+</form>
+
+
+
+</body>
+</html>
+{% endblock %}
