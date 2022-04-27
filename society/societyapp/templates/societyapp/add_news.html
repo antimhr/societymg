@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin:0;
+        padding: 0;
+        height: 100vh;
+        background-image: linear-gradient(to top right, #d6ce15, #3aafa9);
+        background-repeat: no-repeat;
+    }
+    form{
+        border: 1px solid green;
+        margin: 1rem;
+        padding: 2rem;
+        background-color: rgba(230, 250, 240, .8);
+        box-shadow: 5px 10px 20px 10px #888888;
+        border-top-left-radius: 1.2rem;
+        border-bottom-right-radius: 1.2rem;
+    }
+    .title-control{
+        width: 30%;
+        height: 1.5rem;
+        margin-left: 2rem;
+        padding: 5px 10px;
+        border-radius: 8px;
+        border: none;
+        outline: 1px solid grey;
+    }
+    .content-control{
+        padding: 8px 12px;;
+        width: 60%;
+        height: 6rem;;
+        margin-left: .3rem;
+        border-radius: 10px;
+        border: none;
+        outline: 1px solid grey;
+    }
+    label{
+        white-space: pre;
+        color: black;
+        font-size: 20px;
+        margin-left: 8%;;
+    }
+    button{
+        padding: 15px;
+        margin-left: 40%;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(125, 184, 92, .7);
+    }
+    button:hover{
+        background-color: rgba(125, 184, 92, 1);
+        box-shadow: 1px 3px 1px 1px #888888;
+    }
+    h2{
+        margin-top: 2.5rem;
+    }
+</style>
+<body>
+<center><h2>ADD NEWS</h2></center>
+
+<div style="border: 1px solid white; width: 50%; padding:auto; margin:auto; border-top-left-radius: 1.2rem;
+        border-bottom-right-radius: 1.2rem;">
+    <form action="/societyapp/add_news/" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add News</button>
+    </form>
+</div>
+</body>
+</html>

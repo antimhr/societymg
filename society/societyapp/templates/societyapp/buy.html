@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy</title>
+</head>
+<style>
+
+    body{
+        margin:0;
+        padding: 0;
+        height: 100vh;
+        background-image: linear-gradient(to top right, #d6ce15, #3aafa9);
+        background-repeat: no-repeat;
+    }
+    .button{
+        margin: .7rem 0;
+        padding:.8rem 1.5rem;
+        background-color: lightblue;
+        border: none;
+        border-radius: 5px;
+    }
+    .button:hover{
+        background-color: rgba(125, 184, 92, 1);
+        box-shadow: 1px 3px 1px 1px #888888;
+    }
+    form{
+    border-radius: 10px;
+        width: 28%;
+        padding: .7rem;
+        margin: auto;
+        background-color: rgba(230, 250, 240, .8);
+        box-shadow: 5px 10px 20px 10px #888888;
+    }
+    .basicInfo{
+        margin: .3rem 0;
+        width: 65%;
+        padding: 5px 12px;
+        border: 1px solid grey;
+        border-radius: 8px;
+        outline: none;
+    }
+
+</style>
+
+<body>
+<main role="main" class="container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+</main>
+        <div>
+<div class="row">
+    <div class="form-container" style="margin-top: .5rem;">
+        <form action="{% url 'buy' %}" method="post">{% csrf_token %}
+            <h3><center>Buy Flat </center></h3>
+
+            <div style="height: 13.5rem;">
+
+                <strong><legend>Your Basic Info</legend></strong>
+                <hr>
+                <div style="margin-left: 2.5rem;">
+                <strong><label for="name">Name:</label></strong><br>
+                <input type="text" id="name" class="basicInfo" name="name" autocomplete="off" required><br>
+
+                <strong><label for="email">Email:</label></strong><br>
+                <input type="email" id="email" class="basicInfo" name="email" autocomplete="off"  required><br>
+
+                <strong><label for="mobile">Mobile No:</label></strong><br>
+                <input type="number" id="mobile" class="basicInfo" name="mobile" autocomplete="off" required>
+                </div>
+            </div>
+
+            <div>
+
+                <strong><legend>Your Requirements</legend></strong>
+                <hr>
+                <div>
+                    <div style=" display: flex; flex-direction: row; justify-content: space-around;">
+                    <div>
+                <strong><label>Flat size:</label></strong><br>
+                <input type="radio" id="1bhk" name="flat_size" value="1 bhk"><label for="1bhk" class="light"> 1 BHK </label><br>
+                <input type="radio" id="2bhk" name="flat_size" value="2 bhk"><label for="2bhk" class="light"> 2 BHK </label><br>
+                <input type="radio" id="3bhk" name="flat_size" value="3 bhk"><label for="3bhk" class="light"> 3 BHK </label><br>
+
+                <br>
+                        </div>
+                    <div>
+                <strong><label>Flat type:</label></strong><br>
+                <input type="radio" id="furnished" name="furnished" value="furnished"><label for="furnished" class="light">Furnished</label><br>
+                <input type="radio" id="Not furnished" name="furnished" value="not_furnished"><label for="Not furnished" class="light">Non-furnished</label>
+                </div>
+            </div>
+
+
+            <div style="margin-left: 26%;">
+                <strong><label>EMI available:</label></strong><br>
+                <label>HDFC Bank @ 7.5%</label><br>
+                <label>SBI Bank @ 7.25%</label><br>
+                <label>Axis Bank @ 7%</label><br>
+                <label>Union Bank @ 7.2%</label><br>
+
+                </div>
+
+
+                </div>
+            </div>
+
+            <center><button type="submit" class="button">BUY</button></center>
+
+        </form>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

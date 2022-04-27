@@ -10,7 +10,6 @@
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-
     body{
         background-color: #fffbf0;
     }
@@ -35,7 +34,7 @@
     }
     a{
         font-family: 'Lato', sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 20px;
         text-transform: uppercase;
     }
@@ -71,7 +70,7 @@
         display: none;
     }
     .recentnews div{
-        animation: bannermove 15s linear 2s infinite alternate;
+        animation: bannermove 16s linear 2s infinite alternate;
     }
 
 <!--    .recentnews div:hover{-->
@@ -95,12 +94,12 @@
             transform: translate(-280%, 0);
         }
         100% {
-            transform: translate(-350%, 0);
+            transform: translate(-360%, 0);
         }
     }
+
     .main-resident-container{
         background-color: rgba(227, 230, 228, .5);
-        margin: 1rem 0;
     }
     .resident-container{
         display: flex;
@@ -115,16 +114,15 @@
         background-color: white;
         box-shadow: rgba(100, 100, 111, 0.3) 5px 10px 20px 1px;
     }
-    .resident-grid:hover{
+     .resident-grid:hover{
         transition: all .2s linear;
         transform: scale(1.1);
         box-shadow:
             0 0 10px 1px #fff,  /* inner white */
             0 0 15px 2px rgba(143,188,143, .4); /* outer green */
     }
-    }
+
     .main-grid-container{
-          border: 2px solid blue;
           margin-top: .5rem;
           margin-left: 2.5rem;
           margin-right: 2.5rem;
@@ -137,13 +135,51 @@
         justify-content: space-around;
     }
     .grid-item{
-         width: 300px;
-         height: 200px;
-         margin: 1rem;
-         padding: 1rem;
-         border-radius: 10px;
-         background-color: rgba(74, 161, 158, .4);
+        width: 300px;
+        height: 200px;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 10px;
+        background-color: rgba(74, 161, 158, .4);
     }
+
+
+    .society-facilities, .society-information{
+        width: 320px;
+        height: 250px;
+        background-color: lightblue;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    .society-facilities:hover{
+        transition: all .2s linear;
+        transform: scale(1.03);
+    }
+    .society-information:hover{
+        transition: all .2s linear;
+        transform: scale(1.03);
+    }
+
+    .society-fac-img, .society-info-img{
+        height: 80%;
+        border-radius: .5rem;
+    }
+    .society-fac-img img{
+        width: 100%;
+        height:100%;
+        object-fit: fill;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+    .society-info-img img{
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+
     footer {
 <!--        position: fixed;-->
         left: 0;
@@ -154,13 +190,9 @@
 <body>
     <nav class="navbar">
         <ul>
-            <li><a href="\societyapp/user_dashboard">Home</a></li>
-            <li><a href="#">{{ user.name }}</a></li>
-            {% if user.is_superuser %}
-            <li><a href="{% url 'add_news' %}">Add News</a></li>
-            <li><a href="{% url 'visitors' %}">Add Visitor</a></li>
-            {% endif %}
-            <li><a href="{% url 'user_logout' %}">Logout</a></li>
+            <li><a href="\societyapp/guest_dashboard">Home</a></li>
+            <li><a href="\societyapp/login">Login</a></li>
+            <li><a href="\societyapp/signup">Signup</a></li>
             <div class="searchbar">
                 <input type="search" placeholder="Search..." name="search">
                 <button type="submit"><i class="fa-light fa-user">Submit</i></button>
@@ -169,14 +201,13 @@
     </nav>
 
 <!--    Recent news    -->
-
-    <h2><center>Recent News</center></h2>
-<div class="news-container" style="margin-left: 1rem; margin-right: 1rem;">
+    <h2 style="margin-top: .5rem;"><center>Recent News</center></h2>
+<div class="news-container" style="margin: .5rem 1.5rem 1.5rem 1.5rem;">
     <div class="recentnews" id="flavoursContainer" style="display: flex; flex-direction: row; flex-wrap: nowrap; overflow: scroll;">
         {% for n in news %}
         <div class="nws">
-            <h3>{{ n.title }}</h3>
-            <p>{{ n.content }}</p>
+            <h4>{{ n.title }}</h4>
+            <p style="font-size: 15px;">{{ n.content }}</p>
         </div>
         {% endfor %}
     </div>
@@ -184,38 +215,72 @@
 </div>
 
 
-<!--    Start of Visitors Row    -->
-<div class="visitor" style="width: 80%; margin-left: 8rem; border: 1px solid grey; margin-top: .8rem; margin-bottom: 1.8rem;">
-    <div><center><h3>Visitor's</h3></center></div>
-    <table class="table table-striped" style="width: 95%; margin-left: 1.3rem;">
-  <thead>
-    <tr>
-      <th scope="col">No.</th>
-      <th scope="col">Name</th>
-      <th scope="col">Gender</th>
-      <th scope="col">Mobile</th>
-      <th scope="col">Place</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for vis in visitor %}
-    <tr>
-      <th scope="row">{{ forloop.counter }}</th>
-      <td>{{ vis.name }}</td>
-      <td>{{ vis.gender }}</td>
-      <td>{{ vis.mobile }}</td>
-      <td>{{ vis.place }}</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+<!--    Start of    -->
+<div class="main-society-information-container" style=" margin: 1rem;">
+    <h3><center>Society Information</center></h3>
+    <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-around; padding: 10px;">
+        <a style="text-decoration: none; color: black;">
+        <div class="society-information">
+            <div class="society-info-img" style="border-bottom: .6rem solid #ffff;">
+                <img src="https://img.freepik.com/free-vector/green-city-with-eco-houses-with-garden-buildings-roof-balcony-vector-cartoon-illustration-summer-cityscape-with-modern-house-office-buildings-with-green-plants-rooftop-terrace_107791-10736.jpg?size=626&ext=jpg&ga=GA1.1.1813450938.1650367833" alt="House Image">
+            </div>
+            <h5 style="margin-top:.8rem;"><center>1BHK &nbsp; 2BHK &nbsp; 3BHK</center></h5>
+        </div>
+        </a>
+        <a href="\societyapp/rent" style="text-decoration: none; color: black;">
+        <div class="society-information">
+            <div class="society-info-img" style="border-bottom: .6rem solid #ffff;">
+                <img src="https://img.freepik.com/free-vector/green-city-with-eco-houses-with-garden-buildings-roof-balcony-vector-cartoon-illustration-summer-cityscape-with-modern-house-office-buildings-with-green-plants-rooftop-terrace_107791-10736.jpg?size=626&ext=jpg&ga=GA1.1.1813450938.1650367833" alt="House Image">
+            </div>
+            <h5 style="margin-top:.8rem;"><center>Rent</center></h5>
+        </div>
+        </a>
+        <a href="\societyapp/buy" style="text-decoration: none; color: black;">
+        <div class="society-information">
+            <div class="society-info-img" style="border-bottom: .6rem solid #ffff;">
+                <img src="https://img.freepik.com/free-vector/green-city-with-eco-houses-with-garden-buildings-roof-balcony-vector-cartoon-illustration-summer-cityscape-with-modern-house-office-buildings-with-green-plants-rooftop-terrace_107791-10736.jpg?size=626&ext=jpg&ga=GA1.1.1813450938.1650367833" alt="House Image">
+            </div>
+            <h5 style="margin-top:.8rem;"><center>Buy</center></h5>
+        </div>
+        </a>
+    </div>
 </div>
 
-<!--    End of Visitors Row    -->
+<!--    End of Society Information   -->
+
+<!--    Start of Society facilities -->
+
+    <div class="main-society-facilities-container" style="margin: 1rem;">
+    <h3><center>Society Facilities</center></h3>
+    <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-around; padding: 10px;">
+        <div class="society-facilities">
+            <div class="society-fac-img" style="border-bottom: .6rem solid #ffff;">
+                <img src="https://media.istockphoto.com/vectors/people-swimming-in-swimming-pool-top-view-illustration-vector-summer-vector-id1159541508?k=20&m=1159541508&s=612x612&w=0&h=dEPrAXS2iSicLWevZVxxRKUXufMuHDDzkbfd24IHCCM=" alt="pool Image">
+            </div>
+            <h5 style="margin-top:.8rem;"><center>Pool</center></h5>
+        </div>
+        <div class="society-facilities">
+            <div class="society-fac-img" style="border-bottom: .6rem solid #ffff;">
+                <img src="https://img.freepik.com/free-vector/home-gym-with-different-workout-elements_23-2148864728.jpg?size=626&ext=jpg&ga=GA1.2.1813450938.1650367833" alt="Gym Image">
+            </div>
+            <h5 style="margin-top:.8rem;"><center>Gym</center></h5>
+        </div>
+        <div class="society-facilities">
+            <div class="society-fac-img">
+                <img src="https://media.istockphoto.com/vectors/nursery-school-concept-vector-illustration-vector-id1188606845?k=20&m=1188606845&s=612x612&w=0&h=YQ72wIMJOBS7LsPrBTDExvGUouT9afdq0XtN-ZPGH34=" alt="Creche Image"
+                     style="border-bottom-left-radius: .5rem;border-bottom-right-radius: .5rem;">
+            </div>
+            <h5 style="margin-top:.8rem;"><center>Creche</center></h5>
+        </div>
+    </div>
+</div>
+
+<!--    Start of Society facilities -->
+
 
     <div class="main-resident-container">
         <div class="resident-container">
-                <div class="resident-grid"><a href="{% url 'resident' %}" style="text-decoration: none; color: black; font-size: 16px; text-transform: capitalize;">Resident List</a></div>
+                <div class="resident-grid">Resident List</div>
                 <div class="resident-grid">Emergency Number</div>
                 <div class="resident-grid">Documents</div>
                 <div class="resident-grid">Daily Help</div>
@@ -253,7 +318,7 @@
     <div class="main-complain-container" style="margin-bottom: 2rem; margin-top: 1.2rem;">
         <h4><center> Complaint and Suggestion</center></h4>
         <center>
-            <form action="{% url 'complain_user' %}" method="POST" style="margin:.5rem; padding: 2rem 1rem 2rem; width: 60%; background-color:rgba(46, 204, 113, .2); box-shadow: rgba(100, 100, 111, 0.3) 5px 10px 20px 1px; border-radius: 1rem;">
+            <form action="{% url 'complain' %}" method="POST" style="margin:.5rem; padding: 2rem 1rem 2rem; width: 60%; background-color:rgba(46, 204, 113, .2); box-shadow: rgba(100, 100, 111, 0.3) 5px 10px 20px 1px; border-radius: 1rem;">
                 {% csrf_token %}
                 <div>
                     Name: <input type="text" id="name" name="name"> &nbsp; &nbsp;
@@ -277,6 +342,8 @@
         </center>
     </div>
 
+
+
     <!--   End of Complain and suggestion Section  -->
 
 <!--    Footer   -->
@@ -284,7 +351,7 @@
 <footer class="text-center text-white" style="background-color: #f1f1f1;">
   <!-- Grid container -->
   <div class="text-center text-light p-1" style="background-color: rgba(0, 0, 0, 0.6); margin-bottom: -8px;">
-    <h6 style="font-weight: bold;">PRAGATI RESIDENTIAL COMPLEX<p class="text-light">Vasai, Mumbai</p></h6>
+    <h6 style="font-weight: bold; margin-top: 10px;">PRAGATI RESIDENTIAL COMPLEX<p class="text-light">Vasai, Mumbai</p></h6>
     <p style="margin-top: -10px"><strong>Secretory:</strong> Mr. A. K. &nbsp; <strong>Contact:</strong> 1234567890</p>
   </div>
 

@@ -4,7 +4,7 @@
 {{ error }}
 {% endif %}
 
-<form action="{% url 'societyapp:verify' %}" method="POST">{% csrf_token %}
+<form action="{% url 'verify' %}" method="POST">{% csrf_token %}
     <div class="container mt-5">
    <div class="mb-3 col-sm-4">
             <label for="otp" class="form-label ">Enter the OTP</label>

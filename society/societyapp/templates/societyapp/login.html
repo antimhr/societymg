@@ -7,35 +7,88 @@
 "https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/blue_repicthousebase_1484336386-1.png"
         type = "image/x-icon">
 </head>
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+        height: 97vh;
+        width: 90vw;
+        background-image: linear-gradient(to top right, #d6ce15, #3aafa9);
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
+    .main-container{
+        width: 100vw;
+        padding: 0;
+        margin: 0;
+    }
+    .loginform{
+        background-color: lightblue;
+        margin: auto;
+        width: 20%;
+        padding: 2.5rem;
+        border-radius: 1rem;
+    }
+    input{
+        width: calc(100% - 12%);
+        border: none;
+        outline: none;
+        border-radius: 1.2rem;;
+        height: 2.5rem;
+        margin-top: .5rem;
+        margin-bottom: 1.2rem;
+        padding: 0 1rem;
+    }
+    button{
+        padding: 10px 15px;
+        margin-left: 33%;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(125, 184, 92, .7);
+    }
+    button:hover{
+        background-color: rgba(125, 184, 92, 1);
+        box-shadow: 1px 3px 1px 1px #888888;
+    }
+</style>
 <body>
-    <h1>Login Page</h1>
-
+<div class="main-container">
+    <div><center>
+    <h1>User Login</h1>
+    <div style="font-size: 18px; color: red; margin-bottom: .5rem; padding:">
     {% if error %}
     {{ error }}
     {% endif %}
-
-<form action="{% url 'societyapp:login' %}" method="POST"> {% csrf_token %}
+        </div>
+        </center>
+   </div>
+<div class="loginform">
+<form action="{% url 'login' %}" method="POST"> {% csrf_token %}
   <div class="container mt-5">
   <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="text" class="form-control" id="email" name="email">
+    <label for="email" class="form-label">Email</label><br>
+    <input type="text" class="form-control" id="email" name="email" placeholder="Enter Your Email">
   </div>
   <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name="password">
+    <label for="password" class="form-label">Password</label><br>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password" style="margin-bottom: .5rem;">
   </div>
   <br>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">SIGN IN</button>
 </div>
-    <div>
-        <a href="\societyapp/password_reset.html">Forgot Password?</a>
+    <div style="margin: 1rem 0;">
+        <center>
+            <a href="{% url 'reset_password' %}">Forgot Password?</a>
+        </center>
     </div>
     <div>
-        <a href="\societyapp/signup" class="btn btn-primary btn-sm">Register Now</a>
+        <center>
+            <a href="\societyapp/signup" class="btn btn-primary btn-sm">Register Now</a>
+        </center>
     </div>
 </form>
-
-
+    </div>
+</div>
 </body>
 </html>
 

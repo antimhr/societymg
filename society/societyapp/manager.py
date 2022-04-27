@@ -6,7 +6,6 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def create_user(self, email, password=None, **extra_fields):
-
         for key, value in extra_fields.items():
             print(key, value)
         if not email:
